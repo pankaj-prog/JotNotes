@@ -1,13 +1,62 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url("https://adaptiveui.netlify.app/src/components/ui-lib.css");
+@import url("https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap");
+
+/* reset */
+:root {
+  scroll-behavior: smooth;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: mukta;
+}
+
+/* util classes */
+
+.link {
+  text-decoration: none;
+}
+
+.gutter-bottom-8 {
+  margin-bottom: 0.5rem;
+}
+
+.gutter-bottom-16 {
+  margin-bottom: 1rem;
+}
+
+.gutter-bottom-24 {
+  margin-bottom: 1.5rem;
+}
+
+.gutter-bottom-32 {
+  margin-bottom: 2rem;
+}
+
+/* buttons */
+
+.btn {
+  padding: 2px 8px;
+  transition: background-color 0.1s ease;
+}
+
+.btn-solid-primary:hover {
+  background-color: var(--COLOR-PRIMARY-V2);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--COLOR-SECONDARY-V2);
+}
+
+.btn-outline-primary {
+  background-color: var(--COLOR-SECONDARY);
+}
+
+.btn-solid-secondary:hover {
+  background-color: var(--COLOR-SECONDARY-V3);
 }

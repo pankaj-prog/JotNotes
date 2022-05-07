@@ -1,0 +1,35 @@
+.homepage {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.homepage-header {
+  padding: 4px;
+  box-shadow: 0px 2px 4px 0px var(--GRAY);
+}
+
+.homepage-content {
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+.homepage-header .homepage-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.homepage-main .homepage-content {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.homepage-main .app-name {
+  font-size: 3rem;
+  font-style: italic;
+  text-shadow: 2px 2px var(--GRAY);
+}

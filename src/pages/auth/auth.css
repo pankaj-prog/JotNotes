@@ -1,0 +1,90 @@
+.auth-main-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-box {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  box-shadow: 0 0 10px -2px var(--GRAY);
+}
+
+.auth-box-heading {
+  padding: 1rem;
+}
+
+.auth-form {
+  padding: 1.5rem;
+  border-top: 1px solid var(--LIGHT-GRAY);
+  display: flex;
+  width: fit-content;
+  max-width: 42ch;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.auth-form .form-btn {
+  font-size: 1rem;
+  padding: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+}
+
+.auth-form .auth-btn {
+  background-color: var(--BLACK);
+  color: var(--WHITE);
+  border: NONE;
+}
+
+.auth-form .input-container {
+  border-radius: 8px;
+  font-size: 1rem;
+  border: 1px solid var(--BLACK);
+  padding: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.auth-form .input-container i {
+  color: var(--GRAY);
+}
+
+.auth-form .input-container input {
+  font-size: 1rem;
+  min-width: 30ch;
+  outline: thin transparent;
+  border: none;
+  background-color: transparent;
+}
+
+.auth-form .error-message {
+  color: var(--ERROR);
+  line-height: 1.1em;
+}
+
+.auth-form .checkbox-input-container {
+  padding: 0.2rem 0;
+}
+
+.auth-form .checkbox {
+  width: 1rem;
+  height: 1rem;
+}
+
+.auth-form .btn-forgot-password {
+  align-self: center;
+}
+
+.auth-box-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}

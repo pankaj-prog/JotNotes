@@ -1,8 +1,16 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation, Navigate } from "react-router-dom";
+import { useAuth } from "../../context";
 
 const UserRoutes = () => {
-  return <Outlet />;
+  const { isLoggedIn } = useAuth();
+  const location = useLocation();
+
+  return isLoggedIn ? (
+    <Outlet />
+  ) : (
+    <Navigate to="/login" state={{ from: location }} replace />
+  );
 };
 
 export default UserRoutes;

@@ -1,0 +1,9 @@
+.auth-route-header {
+  box-shadow: 0px 2px 4px 0px var(--GRAY);
+  font-style: italic;
+  text-shadow: 1px 1px var(--GRAY);
+}
+
+.auth-route-header .link {
+  color: var(--COLOR-PRIMARY);
+}

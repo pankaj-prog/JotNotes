@@ -20,6 +20,7 @@ body {
 
 .link {
   text-decoration: none;
+  color: inherit;
 }
 
 .gutter-bottom-8 {
@@ -41,7 +42,6 @@ body {
 /* buttons */
 
 .btn {
-  padding: 2px 8px;
   transition: background-color 0.1s ease;
 }
 

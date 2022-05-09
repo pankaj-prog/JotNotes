@@ -1,23 +1,28 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Home.css";
 
 const Home = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="homepage">
       <header className="homepage-header">
         <div className="homepage-content">
           <h2>Jot Notes</h2>
           <div className="homepage-header-ctas">
-            <Link to="/login" className="btn btn-solid-primary btn-rc link">
+            <button
+              onClick={() => navigate("/login")}
+              className="btn btn-solid-primary btn-rc"
+            >
               Log in
-            </Link>{" "}
-            <Link
-              to="/signup"
-              className="btn link btn-solid-primary btn-rc link"
+            </button>{" "}
+            <button
+              onClick={() => navigate("/signup")}
+              className="btn btn-solid-primary btn-rc"
             >
               Sign up
-            </Link>
+            </button>
           </div>
         </div>
       </header>
@@ -30,13 +35,19 @@ const Home = () => {
             Quickly capture what's on your mind and get a reminder later at the
             right place or time.
           </p>
-          <Link to="/signup" className="btn btn-solid-primary btn-rc link">
+          <button
+            onClick={() => navigate("/signup")}
+            className="btn btn-solid-primary btn-rc"
+          >
             Sign up
-          </Link>
+          </button>
           <p>Or</p>
-          <Link to="/login" className="btn-link-primary link fw-b">
+          <button
+            onClick={() => navigate("/login")}
+            className="btn-link-primary btn fw-b"
+          >
             Already have an account
-          </Link>
+          </button>
         </div>
       </main>
     </div>

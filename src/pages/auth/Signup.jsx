@@ -7,8 +7,8 @@ import {
   validateEmail,
   validatePassword,
 } from "./utils/inputValidateUtils";
-import { useAuth } from "../../context";
-import { useAxios } from "../../utils/useAxios";
+import { useAuth } from "context";
+import { useAxios } from "utils/useAxios";
 
 const SignUp = () => {
   const initalFormValidateState = {

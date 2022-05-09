@@ -2,8 +2,8 @@ import React, { useRef, useState, useEffect } from "react";
 import "./auth.css";
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useAxios } from "../../utils/useAxios";
-import { useAuth } from "../../context";
+import { useAxios } from "utils/useAxios";
+import { useAuth } from "context";
 
 import { validateEmail, validatePassword } from "./utils/inputValidateUtils";
 

@@ -1,7 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import { Home, AllNotes, Trash, Archive, Login, Signup } from "./pages";
-import { UserRoutes, AuthRoutes } from "./components";
+import { Home, AllNotes, Trash, Archive, Login, Signup } from "pages";
+import { UserRoutes, AuthRoutes } from "components";
 
 function App() {
   return (

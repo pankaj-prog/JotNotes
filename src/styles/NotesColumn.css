@@ -1,0 +1,57 @@
+.notes-column {
+  border: 1px solid var(--COLOR-PRIMARY-V3);
+  border-top: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.note-list-section {
+  flex-grow: 1;
+  overflow-y: scroll;
+}
+
+.note-list-section::-webkit-scrollbar,
+.ql-editor::-webkit-scrollbar {
+  width: 10px;
+  background-color: var(--COLOR-SECONDARY-V2);
+}
+
+.note-list-section::-webkit-scrollbar-thumb,
+.ql-editor::-webkit-scrollbar-thumb {
+  background-color: var(--COLOR-SECONDARY-V3);
+  border-radius: 10px;
+}
+
+.notes-column-header {
+  display: flex;
+  align-items: center;
+}
+
+.new-note button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-btn-wrapper,
+.new-note button,
+.note-list-item:hover {
+  transition: background-color 0.6s ease;
+}
+
+.icon-btn-wrapper:hover,
+.new-note button:hover,
+.note-list-item:hover {
+  cursor: pointer;
+  background-color: var(--COLOR-SECONDARY-V3);
+}
+
+.user-wrapper {
+  display: flex;
+  justify-content: space-around;
+  box-shadow: 0px -2px 4px 0px var(--COLOR-PRIMARY-V3);
+}

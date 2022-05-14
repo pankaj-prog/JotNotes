@@ -15,14 +15,13 @@
 }
 
 .note-title-input {
-  background-color: transparent;
-  display: block;
-  width: 100%;
-  padding: 10.5px 16px;
-  border-bottom: 1px solid var(--GRAY);
   outline: thin transparent;
   border: none;
-  border-radius: none;
+}
+
+[contenteditable][placeholder]:empty:before {
+  content: attr(placeholder);
+  color: var(--COLOR-PRIMARY-V3);
 }
 
 .editor-wrapper {

@@ -20,9 +20,9 @@ const EditorColumn = () => {
         </section>
       </header>
       <section className="note-title">
-        <input
-          type="text"
-          className="note-title-input text-xxl padding-default"
+        <div
+          contentEditable
+          className="note-title-input text-lg padding-default"
           placeholder="Title..."
         />
       </section>

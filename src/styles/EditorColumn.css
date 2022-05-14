@@ -12,6 +12,9 @@
 
 .note-options {
   display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-right: 2rem;
 }
 
 .note-title-input {
@@ -19,7 +22,7 @@
   border: none;
 }
 
-[contenteditable][placeholder]:empty:before {
+[contenteditable][placeholder]:empty::before {
   content: attr(placeholder);
   color: var(--COLOR-PRIMARY-V3);
 }

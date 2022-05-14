@@ -29,8 +29,8 @@ const notesList = [
 const AllNotes = () => {
   return (
     <div className="app">
-      <NotesColumn notesList={notesList} />
-      <EditorColumn />
+      <NotesColumn currentPageName="allNotes" notesList={notesList} />
+      <EditorColumn currentPageName="allNotes" />
     </div>
   );
 };

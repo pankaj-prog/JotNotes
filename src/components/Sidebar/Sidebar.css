@@ -1,0 +1,40 @@
+.sidebar-wrapper {
+  position: absolute;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(1px);
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  display: flex;
+}
+
+.sidebar {
+  background-color: var(--COLOR-SECONDARY);
+  min-width: 15vw;
+}
+
+.sidebar header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.sidebar ul {
+  list-style-type: none;
+}
+
+.sidebar li:hover {
+  background-color: var(--COLOR-SECONDARY-V3);
+}
+
+.sidebar-link {
+  border-bottom: 1px solid var(--COLOR-PRIMARY-V3);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.5rem 1rem;
+}
+
+.active-sidebar-link {
+  background-color: var(--COLOR-SECONDARY-V3);
+}

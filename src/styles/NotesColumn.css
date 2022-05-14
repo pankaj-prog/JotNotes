@@ -16,7 +16,6 @@
 .ql-editor::-webkit-scrollbar {
   width: 10px;
   background-color: var(--COLOR-SECONDARY-V2);
-  /* border: 1px solid var(--COLOR-SECONDARY-V3); */
 }
 
 .note-list-section::-webkit-scrollbar-thumb,

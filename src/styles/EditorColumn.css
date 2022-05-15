@@ -18,6 +18,8 @@
 }
 
 .note-title-input {
+  background-color: transparent;
+  font-family: mukta;
   display: block;
   width: 100%;
   outline: thin transparent;

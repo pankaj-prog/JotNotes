@@ -4,6 +4,10 @@ import React, { useState } from "react";
 const NotesRoute = ({ currentPageName, notesList }) => {
   const [selectedNote, setSelectedNote] = useState();
 
+  if (!selectedNote && notesList.length > 0) {
+    setSelectedNote(notesList[0]);
+  }
+
   return (
     <div className="app">
       <NotesColumn

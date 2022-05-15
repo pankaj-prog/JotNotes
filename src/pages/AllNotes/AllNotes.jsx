@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { NotesRoute } from "components";
+import { useAllNotes } from "context";
 
 const notesList = [
   {
@@ -27,7 +28,9 @@ const notesList = [
 ];
 
 const AllNotes = () => {
-  return <NotesRoute currentPageName={"allNotes"} notesList={notesList} />;
+  const { allNotesList } = useAllNotes();
+
+  return <NotesRoute currentPageName={"allNotes"} notesList={allNotesList} />;
 };
 
 export default AllNotes;

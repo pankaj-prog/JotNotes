@@ -16,7 +16,13 @@ const EditorColumn = ({ currentPageName, selectedNote }) => {
     }
   }, [selectedNote]);
 
-  return (
+  return !selectedNote ? (
+    <main className="editor-column">
+      <header className="editor-column-header border-bottom">
+        <IconButton name="Focus" icon={<VscOpenPreview />} />
+      </header>
+    </main>
+  ) : (
     <main className="editor-column">
       <header className="editor-column-header border-bottom">
         <IconButton name="Focus" icon={<VscOpenPreview />} />
@@ -49,6 +55,7 @@ const EditorColumn = ({ currentPageName, selectedNote }) => {
           readOnly={currentPageName == "trash" ? true : false}
           className="note-title-input text-lg padding-default"
           placeholder="Title..."
+          rows="1"
           value={title}
           onChange={(e) => {
             e.target.style.height = "inherit";

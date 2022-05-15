@@ -3,6 +3,17 @@ import { IconButton, NoteListSection, Sidebar } from "components";
 import { AiOutlineMenu, AiOutlinePlus } from "react-icons/ai";
 import { useAuth } from "context";
 
+const pageTitle = (currentPageName) => {
+  switch (currentPageName) {
+    case "allNotes":
+      return "All Notes";
+    case "trash":
+      return "Trash";
+    case "archive":
+      return "Archive";
+  }
+};
+
 const NotesColumn = ({
   notesList,
   currentPageName,
@@ -25,7 +36,9 @@ const NotesColumn = ({
             icon={<AiOutlineMenu />}
             clickHandler={() => setShowSidebar(true)}
           />
-          <p className="fw-b notes-column-title ">All Notes</p>
+          <p className="fw-b notes-column-title ">
+            {pageTitle(currentPageName)}
+          </p>
         </header>
         {currentPageName == "allNotes" && (
           <section className="new-note border-bottom padding-default">
@@ -37,6 +50,13 @@ const NotesColumn = ({
             </button>
           </section>
         )}
+
+        {!(currentPageName == "allNotes") && notesList.length == 0 && (
+          <section className="empty-notes-container padding-default">
+            Your {pageTitle(currentPageName)} is currently empty.
+          </section>
+        )}
+
         <NoteListSection
           notesList={notesList}
           selectedNote={selectedNote}

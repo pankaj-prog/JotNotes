@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { VscOpenPreview, VscColorMode } from "react-icons/vsc";
 import { IoArchiveOutline } from "react-icons/io5";
@@ -6,8 +6,15 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { IconButton } from "components";
 
-const EditorColumn = ({ currentPageName }) => {
+const EditorColumn = ({ currentPageName, selectedNote }) => {
   const [value, setValue] = useState("");
+  const [title, setTitle] = useState("");
+  useEffect(() => {
+    if (selectedNote) {
+      setValue(selectedNote.content);
+      setTitle(selectedNote.title);
+    }
+  }, [selectedNote]);
 
   return (
     <main className="editor-column">
@@ -38,10 +45,16 @@ const EditorColumn = ({ currentPageName }) => {
         </section>
       </header>
       <section className="note-title">
-        <div
-          contentEditable={currentPageName == "trash" ? false : true}
+        <textarea
+          readOnly={currentPageName == "trash" ? true : false}
           className="note-title-input text-lg padding-default"
           placeholder="Title..."
+          value={title}
+          onChange={(e) => {
+            e.target.style.height = "inherit";
+            e.target.style.height = `${e.target.scrollHeight}px`;
+            setTitle(e.target.value);
+          }}
         />
       </section>
       <section className="editor-wrapper">

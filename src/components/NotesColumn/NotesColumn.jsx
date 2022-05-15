@@ -3,7 +3,12 @@ import { IconButton, NoteListSection, Sidebar } from "components";
 import { AiOutlineMenu, AiOutlinePlus } from "react-icons/ai";
 import { useAuth } from "context";
 
-const NotesColumn = ({ notesList, currentPageName }) => {
+const NotesColumn = ({
+  notesList,
+  currentPageName,
+  selectedNote,
+  setSelectedNote,
+}) => {
   const { setEncodedToken } = useAuth();
   const [showSidebar, setShowSidebar] = useState(false);
 
@@ -32,7 +37,11 @@ const NotesColumn = ({ notesList, currentPageName }) => {
             </button>
           </section>
         )}
-        <NoteListSection notesList={notesList} />
+        <NoteListSection
+          notesList={notesList}
+          selectedNote={selectedNote}
+          setSelectedNote={setSelectedNote}
+        />
         <section className="user-wrapper padding-default">
           <h4>Pankaj Wadhwani</h4>
           <button

@@ -1,5 +1,5 @@
-import React from "react";
-import { EditorColumn, NotesColumn } from "components";
+import React, { useState } from "react";
+import { NotesRoute } from "components";
 
 const notesList = [
   {
@@ -26,12 +26,7 @@ const notesList = [
 ];
 
 const Archive = () => {
-  return (
-    <div className="app">
-      <NotesColumn currentPageName="archive" notesList={notesList} />
-      <EditorColumn currentPageName="archive" />
-    </div>
-  );
+  return <NotesRoute currentPageName={"archive"} notesList={notesList} />;
 };
 
 export default Archive;

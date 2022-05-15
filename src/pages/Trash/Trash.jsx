@@ -1,5 +1,5 @@
-import React from "react";
-import { EditorColumn, NotesColumn } from "components";
+import React, { useState } from "react";
+import { NotesRoute } from "components";
 
 const notesList = [
   {
@@ -26,12 +26,7 @@ const notesList = [
 ];
 
 const Trash = () => {
-  return (
-    <div className="app">
-      <NotesColumn currentPageName="trash" notesList={notesList} />
-      <EditorColumn currentPageName="trash" />
-    </div>
-  );
+  return <NotesRoute currentPageName={"trash"} notesList={notesList} />;
 };
 
 export default Trash;

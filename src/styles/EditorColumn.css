@@ -18,13 +18,10 @@
 }
 
 .note-title-input {
+  display: block;
+  width: 100%;
   outline: thin transparent;
   border: none;
-}
-
-[contenteditable][placeholder]:empty::before {
-  content: attr(placeholder);
-  color: var(--COLOR-PRIMARY-V3);
 }
 
 .editor-wrapper {

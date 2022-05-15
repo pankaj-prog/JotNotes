@@ -5,3 +5,4 @@ export { default as NoteListSection } from "./NoteListSection/NoteListSection";
 export { default as EditorColumn } from "./EditorColumn/EditorColumn";
 export { default as NotesColumn } from "./NotesColumn/NotesColumn";
 export { default as Sidebar } from "./Sidebar/Sidebar";
+export { default as NotesRoute } from "./NotesRoute/NotesRoute";

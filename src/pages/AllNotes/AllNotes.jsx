@@ -1,38 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { EditorColumn, NotesColumn } from "components";
+import { NotesRoute } from "components";
 
 const notesList = [
   {
     _id: 123,
     title: "Handling react state",
     content:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Velit sint nesciunt corrupti possimus iste earum tenetur commodi expedita ex omnis.",
+      "first note dolor sit amet consectetur adipisicing elit. Velit sint nesciunt corrupti possimus iste earum tenetur commodi expedita ex omnis.",
     tags: ["first note"],
   },
   {
     _id: 124,
     title: "side effects in react",
     content:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Velit sint nesciunt corrupti possimus iste earum tenetur commodi expedita ex omnis.",
+      "second note, dolor sit amet consectetur adipisicing elit. Velit sint nesciunt corrupti possimus iste earum tenetur commodi expedita ex omnis.",
     tags: ["first note"],
   },
   {
     _id: 125,
     title: "controlled and uncontrolled components",
     content:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Velit sint nesciunt corrupti possimus iste earum tenetur commodi expedita ex omnis.",
+      "third note, dolor sit amet consectetur adipisicing elit. Velit sint nesciunt corrupti possimus iste earum tenetur commodi expedita ex omnis.",
     tags: ["first note"],
   },
 ];
 
 const AllNotes = () => {
-  return (
-    <div className="app">
-      <NotesColumn currentPageName="allNotes" notesList={notesList} />
-      <EditorColumn currentPageName="allNotes" />
-    </div>
-  );
+  return <NotesRoute currentPageName={"allNotes"} notesList={notesList} />;
 };
 
 export default AllNotes;

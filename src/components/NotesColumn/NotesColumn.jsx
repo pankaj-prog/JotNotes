@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IconButton, NoteListSection, Sidebar } from "components";
 import { AiOutlineMenu, AiOutlinePlus } from "react-icons/ai";
-import { useAuth } from "context";
+import { useAllNotes, useAuth } from "context";
+import { useAxios } from "utils/useAxios";
+import uuid from "draft-js/lib/uuid";
+import { add } from "draft-js/lib/DraftEntity";
 
 const pageTitle = (currentPageName) => {
   switch (currentPageName) {
@@ -20,13 +23,43 @@ const NotesColumn = ({
   selectedNote,
   setSelectedNote,
 }) => {
-  const { setEncodedToken } = useAuth();
+  const { setEncodedToken, encodedToken } = useAuth();
   const [showSidebar, setShowSidebar] = useState(false);
+  const { makeRequest: addNewNoteRequest, response: addNewNoteResponse } =
+    useAxios();
+
+  const { allNotesList, setAllNotesList } = useAllNotes();
 
   const logoutHandler = () => {
     localStorage.removeItem("encodedToken");
     setEncodedToken(null);
   };
+
+  const createNoteHandler = () => {
+    addNewNoteRequest({
+      method: "post",
+      url: "/api/notes",
+      headers: { authorization: encodedToken },
+      data: {
+        note: {
+          _id: uuid(),
+          title: "",
+          content: "",
+          tags: [],
+          color: "",
+          createdAt: Date.now(),
+          editedAt: Date.now(),
+        },
+      },
+    });
+  };
+
+  useEffect(() => {
+    if (addNewNoteResponse) {
+      setAllNotesList([...allNotesList, addNewNoteResponse.notes.at(-1)]);
+      setSelectedNote(addNewNoteResponse.notes.at(-1));
+    }
+  }, [addNewNoteResponse]);
 
   return (
     <>
@@ -42,7 +75,7 @@ const NotesColumn = ({
         </header>
         {currentPageName == "allNotes" && (
           <section className="new-note border-bottom padding-default">
-            <button className="btn text-btn">
+            <button className="btn text-btn" onClick={createNoteHandler}>
               <span className="text-lg">
                 <AiOutlinePlus />
               </span>

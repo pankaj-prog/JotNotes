@@ -1,4 +1,6 @@
 import React from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.bubble.css";
 
 const NoteListSection = ({ notesList, selectedNote, setSelectedNote }) => {
   return (
@@ -14,8 +16,14 @@ const NoteListSection = ({ notesList, selectedNote, setSelectedNote }) => {
               }`}
               onClick={() => setSelectedNote(note)}
             >
-              <h5 className="text-ellipsis">{note.title}</h5>
-              <p className="text-ellipsis">{note.content}</p>
+              <h5 className="text-ellipsis">
+                {note.title ? note.title : "New Note"}
+              </h5>
+              <ReactQuill
+                value={note.content ? note.content : "..."}
+                readOnly={true}
+                theme="bubble"
+              />
             </li>
           );
         })}

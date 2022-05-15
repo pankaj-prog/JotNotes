@@ -53,6 +53,14 @@
   background-color: var(--COLOR-SECONDARY-V3);
 }
 
+.note-list-item .ql-editor {
+  padding: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .selected-note {
   background-color: var(--COLOR-SECONDARY-V3);
 }

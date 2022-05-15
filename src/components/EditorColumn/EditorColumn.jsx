@@ -1,20 +1,58 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { VscOpenPreview, VscColorMode } from "react-icons/vsc";
 import { IoArchiveOutline } from "react-icons/io5";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { IconButton } from "components";
+import { useAxios } from "utils/useAxios";
+import { debounce } from "utils/debounce";
+import { useAllNotes, useAuth } from "context";
 
 const EditorColumn = ({ currentPageName, selectedNote }) => {
-  const [value, setValue] = useState("");
+  const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
+
+  const { setAllNotesList } = useAllNotes();
+  const { encodedToken } = useAuth();
+
+  const { makeRequest: updateNoteRequest, response: updateNoteResponse } =
+    useAxios();
+
   useEffect(() => {
     if (selectedNote) {
-      setValue(selectedNote.content);
+      setContent(selectedNote.content);
       setTitle(selectedNote.title);
     }
   }, [selectedNote]);
+
+  useEffect(() => {
+    if (selectedNote) {
+      debounce(
+        () =>
+          updateNoteRequest({
+            method: "post",
+            url: `/api/notes/${selectedNote?._id}`,
+            headers: { authorization: encodedToken },
+            data: {
+              note: {
+                ...selectedNote,
+                editedAt: Date.now(),
+                title: title,
+                content: content,
+              },
+            },
+          }),
+        300
+      );
+    }
+  }, [content, title]);
+
+  useEffect(() => {
+    if (updateNoteResponse) {
+      setAllNotesList(updateNoteResponse.notes);
+    }
+  }, [updateNoteResponse]);
 
   return !selectedNote ? (
     <main className="editor-column">
@@ -67,8 +105,11 @@ const EditorColumn = ({ currentPageName, selectedNote }) => {
       <section className="editor-wrapper">
         <ReactQuill
           theme="snow"
-          value={value}
-          onChange={setValue}
+          value={content}
+          onChange={(e) => {
+            console.log("on change working");
+            setContent(e);
+          }}
           readOnly={currentPageName == "trash" ? true : false}
           placeholder="Start jotting your notes..."
         />

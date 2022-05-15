@@ -1,34 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 
 import { NotesRoute } from "components";
-import { useAllNotes } from "context";
-
-const notesList = [
-  {
-    _id: 123,
-    title: "Handling react state",
-    content:
-      "first note dolor sit amet consectetur adipisicing elit. Velit sint nesciunt corrupti possimus iste earum tenetur commodi expedita ex omnis.",
-    tags: ["first note"],
-  },
-  {
-    _id: 124,
-    title: "side effects in react",
-    content:
-      "second note, dolor sit amet consectetur adipisicing elit. Velit sint nesciunt corrupti possimus iste earum tenetur commodi expedita ex omnis.",
-    tags: ["first note"],
-  },
-  {
-    _id: 125,
-    title: "controlled and uncontrolled components",
-    content:
-      "third note, dolor sit amet consectetur adipisicing elit. Velit sint nesciunt corrupti possimus iste earum tenetur commodi expedita ex omnis.",
-    tags: ["first note"],
-  },
-];
+import { useAllNotes, useAuth } from "context";
+import { useAxios } from "utils/useAxios";
 
 const AllNotes = () => {
-  const { allNotesList } = useAllNotes();
+  const { allNotesList, setAllNotesList } = useAllNotes();
+  const { encodedToken } = useAuth();
+  const { makeRequest: getAllNotesRequest, response: getAllNotesResponse } =
+    useAxios();
+
+  useEffect(() => {
+    getAllNotesRequest({
+      method: "get",
+      url: "/api/notes",
+      headers: { authorization: encodedToken },
+    });
+  }, []);
+
+  useEffect(() => {
+    if (getAllNotesResponse) {
+      setAllNotesList(getAllNotesResponse.notes);
+    }
+  }, [getAllNotesResponse]);
 
   return <NotesRoute currentPageName={"allNotes"} notesList={allNotesList} />;
 };

@@ -1,5 +1,5 @@
 import { EditorColumn, NotesColumn } from "components";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const NotesRoute = ({ currentPageName, notesList }) => {
   const [selectedNote, setSelectedNote] = useState();
@@ -7,6 +7,12 @@ const NotesRoute = ({ currentPageName, notesList }) => {
   if (!selectedNote && notesList.length > 0) {
     setSelectedNote(notesList[0]);
   }
+
+  useEffect(() => {
+    if (notesList.length == 0) {
+      setSelectedNote(null);
+    }
+  }, [notesList]);
 
   return (
     <div className="app">
@@ -18,6 +24,7 @@ const NotesRoute = ({ currentPageName, notesList }) => {
       />
       <EditorColumn
         currentPageName={currentPageName}
+        notesList={notesList}
         selectedNote={selectedNote}
         setSelectedNote={setSelectedNote}
       />

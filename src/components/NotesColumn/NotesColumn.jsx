@@ -47,6 +47,7 @@ const NotesColumn = ({
           content: "",
           tags: [],
           color: "",
+          isPinned: false,
           createdAt: Date.now(),
           editedAt: Date.now(),
         },

@@ -7,13 +7,14 @@ import "react-quill/dist/quill.snow.css";
 import { IconButton } from "components";
 import { useAxios } from "utils/useAxios";
 import { debounce } from "utils/debounce";
-import { useAllNotes, useAuth } from "context";
+import { useAllNotes, useArchive, useAuth } from "context";
 
-const EditorColumn = ({ currentPageName, selectedNote }) => {
+const EditorColumn = ({ currentPageName, selectedNote, notesList }) => {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
 
   const { setAllNotesList } = useAllNotes();
+  const { addToArchive, unArchive, deleteFromArchive } = useArchive();
   const { encodedToken } = useAuth();
 
   const { makeRequest: updateNoteRequest, response: updateNoteResponse } =
@@ -68,7 +69,11 @@ const EditorColumn = ({ currentPageName, selectedNote }) => {
           {currentPageName == "allNotes" && (
             <>
               <IconButton name="Color" icon={<VscColorMode />} />
-              <IconButton name="Archive" icon={<IoArchiveOutline />} />
+              <IconButton
+                name="Archive"
+                icon={<IoArchiveOutline />}
+                clickHandler={() => addToArchive(selectedNote)}
+              />
               <IconButton name="Trash" icon={<AiOutlineDelete />} />
             </>
           )}
@@ -82,15 +87,25 @@ const EditorColumn = ({ currentPageName, selectedNote }) => {
 
           {currentPageName == "archive" && (
             <>
-              <button className="btn text-btn">Move to trash</button>
-              <button className="btn text-btn">Unarchive</button>
+              <button
+                className="btn text-btn"
+                onClick={() => deleteFromArchive(selectedNote)}
+              >
+                Delete Note
+              </button>
+              <button
+                className="btn text-btn"
+                onClick={() => unArchive(selectedNote)}
+              >
+                Unarchive
+              </button>
             </>
           )}
         </section>
       </header>
       <section className="note-title">
         <textarea
-          readOnly={currentPageName == "trash" ? true : false}
+          readOnly={currentPageName == "allNotes" ? false : true}
           className="note-title-input text-lg padding-default"
           placeholder="Title..."
           rows="1"
@@ -104,13 +119,13 @@ const EditorColumn = ({ currentPageName, selectedNote }) => {
       </section>
       <section className="editor-wrapper">
         <ReactQuill
-          theme="snow"
+          theme={currentPageName == "allNotes" ? "snow" : "bubble"}
           value={content}
           onChange={(e) => {
             console.log("on change working");
             setContent(e);
           }}
-          readOnly={currentPageName == "trash" ? true : false}
+          readOnly={currentPageName == "allNotes" ? false : true}
           placeholder="Start jotting your notes..."
         />
       </section>

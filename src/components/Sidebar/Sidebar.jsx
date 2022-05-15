@@ -8,9 +8,19 @@ import "./Sidebar.css";
 import { IconButton } from "components";
 
 const links = [
-  { name: "All Notes", pathName: "/user/allnotes", icon: <MdOutlineNotes /> },
-  { name: "Archive", pathName: "/user/archive", icon: <IoArchiveOutline /> },
-  { name: "Trash", pathName: "/user/trash", icon: <AiOutlineDelete /> },
+  {
+    _id: 1,
+    name: "All Notes",
+    pathName: "/user/allnotes",
+    icon: <MdOutlineNotes />,
+  },
+  {
+    _id: 2,
+    name: "Archive",
+    pathName: "/user/archive",
+    icon: <IoArchiveOutline />,
+  },
+  { _id: 3, name: "Trash", pathName: "/user/trash", icon: <AiOutlineDelete /> },
 ];
 
 const Sidebar = ({ setShowSidebar }) => {
@@ -29,7 +39,7 @@ const Sidebar = ({ setShowSidebar }) => {
         <ul>
           {links.map((link) => {
             return (
-              <li>
+              <li key={link._id}>
                 <NavLink
                   className={({ isActive }) =>
                     isActive

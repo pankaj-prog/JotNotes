@@ -71,7 +71,7 @@ const Login = () => {
     if (isLoggedIn && location?.state?.from?.pathname) {
       navigate(location.state.from.pathname);
     } else if (isLoggedIn) {
-      navigate("/user");
+      navigate("/user/allnotes");
     }
   }, [isLoggedIn]);
 

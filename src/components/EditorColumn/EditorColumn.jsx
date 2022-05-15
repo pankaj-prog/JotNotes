@@ -6,7 +6,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { IconButton } from "components";
 
-const EditorColumn = () => {
+const EditorColumn = ({ currentPageName }) => {
   const [value, setValue] = useState("");
 
   return (
@@ -14,14 +14,32 @@ const EditorColumn = () => {
       <header className="editor-column-header border-bottom">
         <IconButton name="Focus" icon={<VscOpenPreview />} />
         <section className="note-options">
-          <IconButton name="Color" icon={<VscColorMode />} />
-          <IconButton name="Archive" icon={<IoArchiveOutline />} />
-          <IconButton name="Trash" icon={<AiOutlineDelete />} />
+          {currentPageName == "allNotes" && (
+            <>
+              <IconButton name="Color" icon={<VscColorMode />} />
+              <IconButton name="Archive" icon={<IoArchiveOutline />} />
+              <IconButton name="Trash" icon={<AiOutlineDelete />} />
+            </>
+          )}
+
+          {currentPageName == "trash" && (
+            <>
+              <button className="btn text-btn">Restore Note</button>
+              <button className="btn btn-alert">Delete Permanently</button>
+            </>
+          )}
+
+          {currentPageName == "archive" && (
+            <>
+              <button className="btn text-btn">Move to trash</button>
+              <button className="btn text-btn">Unarchive</button>
+            </>
+          )}
         </section>
       </header>
       <section className="note-title">
         <div
-          contentEditable
+          contentEditable={currentPageName == "trash" ? false : true}
           className="note-title-input text-lg padding-default"
           placeholder="Title..."
         />
@@ -31,6 +49,7 @@ const EditorColumn = () => {
           theme="snow"
           value={value}
           onChange={setValue}
+          readOnly={currentPageName == "trash" ? true : false}
           placeholder="Start jotting your notes..."
         />
       </section>

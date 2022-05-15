@@ -7,10 +7,10 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/user" element={<UserRoutes />}>
-        <Route index element={<AllNotes />} />
-        <Route path="trash" element={<Trash />} />
-        <Route path="archive" element={<Archive />} />
+      <Route element={<UserRoutes />}>
+        <Route path="/user/allnotes" element={<AllNotes />} />
+        <Route path="/user/trash" element={<Trash />} />
+        <Route path="/user/archive" element={<Archive />} />
       </Route>
       <Route element={<AuthRoutes />}>
         <Route path="/login" element={<Login />} />

@@ -37,6 +37,12 @@
   gap: 8px;
 }
 
+.empty-notes-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .new-note button,
 .note-list-item {
   transition: background-color 0.6s ease;
@@ -47,12 +53,20 @@
   background-color: var(--COLOR-SECONDARY-V3);
 }
 
+.note-list-item .ql-editor {
+  padding: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .selected-note {
   background-color: var(--COLOR-SECONDARY-V3);
 }
 
 .user-wrapper {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   box-shadow: 0px -2px 4px 0px var(--COLOR-PRIMARY-V3);
 }

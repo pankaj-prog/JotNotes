@@ -17,14 +17,36 @@
   margin-right: 2rem;
 }
 
-.note-title-input {
-  outline: thin transparent;
-  border: none;
+.color-wrapper {
+  position: relative;
 }
 
-[contenteditable][placeholder]:empty::before {
-  content: attr(placeholder);
-  color: var(--COLOR-PRIMARY-V3);
+.color-wrapper .colors {
+  background-color: var(--COLOR-SECONDARY);
+  padding: 4px;
+  border: 1px solid var(--COLOR-SECONDARY-V3);
+  border-radius: 8px;
+  position: absolute;
+  display: inline-flex;
+  gap: 0.5rem;
+  z-index: 1;
+  top: 2rem;
+  left: -50%;
+}
+
+.color-wrapper .color {
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.note-title-input {
+  background-color: transparent;
+  font-family: mukta;
+  display: block;
+  width: 100%;
+  outline: thin transparent;
+  border: none;
 }
 
 .editor-wrapper {

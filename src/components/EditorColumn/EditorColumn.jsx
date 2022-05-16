@@ -7,7 +7,7 @@ import "react-quill/dist/quill.snow.css";
 import { IconButton } from "components";
 import { useAxios } from "utils/useAxios";
 import { debounce } from "utils/debounce";
-import { useAllNotes, useArchive, useAuth } from "context";
+import { useAllNotes, useArchive, useAuth, useTrash } from "context";
 
 const EditorColumn = ({ currentPageName, selectedNote, notesList }) => {
   const [content, setContent] = useState("");
@@ -15,6 +15,7 @@ const EditorColumn = ({ currentPageName, selectedNote, notesList }) => {
 
   const { setAllNotesList } = useAllNotes();
   const { addToArchive, unArchive, deleteFromArchive } = useArchive();
+  const { moveToTrash, restoreNote, deleteFromTrash } = useTrash();
   const { encodedToken } = useAuth();
 
   const { makeRequest: updateNoteRequest, response: updateNoteResponse } =
@@ -74,14 +75,28 @@ const EditorColumn = ({ currentPageName, selectedNote, notesList }) => {
                 icon={<IoArchiveOutline />}
                 clickHandler={() => addToArchive(selectedNote)}
               />
-              <IconButton name="Trash" icon={<AiOutlineDelete />} />
+              <IconButton
+                name="Trash"
+                icon={<AiOutlineDelete />}
+                clickHandler={() => moveToTrash(selectedNote)}
+              />
             </>
           )}
 
           {currentPageName == "trash" && (
             <>
-              <button className="btn text-btn">Restore Note</button>
-              <button className="btn btn-alert">Delete Permanently</button>
+              <button
+                className="btn text-btn"
+                onClick={() => restoreNote(selectedNote)}
+              >
+                Restore Note
+              </button>
+              <button
+                className="btn btn-alert"
+                onClick={() => deleteFromTrash(selectedNote)}
+              >
+                Delete Permanently
+              </button>
             </>
           )}
 

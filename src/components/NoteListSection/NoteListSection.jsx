@@ -7,7 +7,7 @@ const NoteListSection = ({ notesList, selectedNote, setSelectedNote }) => {
     <section className="note-list-section">
       {/* add options for sort and filter here */}
       <ul className="note-list ">
-        {notesList.map((note) => {
+        {notesList?.map((note) => {
           return (
             <li
               key={note._id}

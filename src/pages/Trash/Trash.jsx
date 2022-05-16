@@ -1,32 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { NotesRoute } from "components";
-
-const notesList = [
-  {
-    _id: 123,
-    title: "Handling react state",
-    content:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Velit sint nesciunt corrupti possimus iste earum tenetur commodi expedita ex omnis.",
-    tags: ["first note"],
-  },
-  {
-    _id: 124,
-    title: "side effects in react",
-    content:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Velit sint nesciunt corrupti possimus iste earum tenetur commodi expedita ex omnis.",
-    tags: ["first note"],
-  },
-  {
-    _id: 125,
-    title: "controlled and uncontrolled components",
-    content:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Velit sint nesciunt corrupti possimus iste earum tenetur commodi expedita ex omnis.",
-    tags: ["first note"],
-  },
-];
+import { useAuth, useTrash } from "context";
+import { useAxios } from "utils/useAxios";
 
 const Trash = () => {
-  return <NotesRoute currentPageName={"trash"} notesList={notesList} />;
+  const { trashNotesList, setTrashNotesList } = useTrash();
+  const { encodedToken } = useAuth();
+
+  const { makeRequest: getTrashNotesRequest, response: getTrashNotesResponse } =
+    useAxios();
+
+  useEffect(() => {
+    getTrashNotesRequest({
+      method: "get",
+      url: "/api/trash",
+      headers: { authorization: encodedToken },
+    });
+  }, []);
+
+  useEffect(() => {
+    if (getTrashNotesResponse) {
+      setTrashNotesList(getTrashNotesResponse.trash);
+    }
+  }, [getTrashNotesResponse]);
+
+  return <NotesRoute currentPageName={"trash"} notesList={trashNotesList} />;
 };
 
 export default Trash;

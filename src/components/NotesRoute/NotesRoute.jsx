@@ -2,14 +2,10 @@ import { EditorColumn, NotesColumn } from "components";
 import React, { useState, useEffect } from "react";
 
 const NotesRoute = ({ currentPageName, notesList }) => {
-  const [selectedNote, setSelectedNote] = useState();
-
-  if (!selectedNote && notesList.length > 0) {
-    setSelectedNote(notesList[0]);
-  }
+  const [selectedNote, setSelectedNote] = useState(null);
 
   useEffect(() => {
-    if (notesList.length == 0) {
+    if (!notesList?.some((note) => note._id == selectedNote?._id)) {
       setSelectedNote(null);
     }
   }, [notesList]);

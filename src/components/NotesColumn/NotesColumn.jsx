@@ -4,7 +4,6 @@ import { AiOutlineMenu, AiOutlinePlus } from "react-icons/ai";
 import { useAllNotes, useAuth } from "context";
 import { useAxios } from "utils/useAxios";
 import uuid from "draft-js/lib/uuid";
-import { add } from "draft-js/lib/DraftEntity";
 
 const pageTitle = (currentPageName) => {
   switch (currentPageName) {
@@ -85,7 +84,7 @@ const NotesColumn = ({
           </section>
         )}
 
-        {!(currentPageName == "allNotes") && notesList.length == 0 && (
+        {!(currentPageName == "allNotes") && notesList?.length == 0 && (
           <section className="empty-notes-container padding-default">
             Your {pageTitle(currentPageName)} is currently empty.
           </section>
@@ -97,7 +96,7 @@ const NotesColumn = ({
           setSelectedNote={setSelectedNote}
         />
         <section className="user-wrapper padding-default">
-          <h4>Pankaj Wadhwani</h4>
+          <h4>User's Name</h4>
           <button
             className="btn btn-solid-primary btn-rc logout-btn"
             onClick={logoutHandler}

@@ -67,6 +67,6 @@
 
 .user-wrapper {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   box-shadow: 0px -2px 4px 0px var(--COLOR-PRIMARY-V3);
 }

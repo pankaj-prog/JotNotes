@@ -21,6 +21,10 @@ const NotesRoute = ({ currentPageName, notesList }) => {
     }
   }, [notesList]);
 
+  useEffect(() => {
+    setSelectedNote(null);
+  }, [filterState]);
+
   return (
     <div className="app">
       <NotesColumn

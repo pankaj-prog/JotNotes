@@ -11,12 +11,7 @@ import { useAllNotes, useArchive, useAuth, useTrash } from "context";
 
 const colors = ["#f0f8ff", "#f9e5e5", "#d7f5c2"];
 
-const EditorColumn = ({
-  currentPageName,
-  selectedNote,
-  notesList,
-  setSelectedNote,
-}) => {
+const EditorColumn = ({ currentPageName, selectedNote, setSelectedNote }) => {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
 
@@ -190,6 +185,7 @@ const EditorColumn = ({
             e.target.style.height = "inherit";
             e.target.style.height = `${e.target.scrollHeight}px`;
             setTitle(e.target.value);
+            setSelectedNote({ ...selectedNote, title: e.target.value });
           }}
         />
       </section>
@@ -217,7 +213,7 @@ const EditorColumn = ({
                 tags: [...selectedNote.tags, tagRef.current.value],
               });
             }
-            tagRef.current.value = " ";
+            tagRef.current.value = "";
           }}
         ></IconButton>
       </section>
@@ -227,6 +223,7 @@ const EditorColumn = ({
           value={content}
           onChange={(e) => {
             setContent(e);
+            setSelectedNote({ ...selectedNote, content: e });
           }}
           readOnly={currentPageName == "allNotes" ? false : true}
           placeholder="Start jotting your notes..."

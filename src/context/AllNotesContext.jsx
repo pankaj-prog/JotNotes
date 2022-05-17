@@ -36,7 +36,6 @@ const AllNotesProvider = ({ children }) => {
   }, [updateColorResponse]);
 
   const updateNoteTags = async (note, tags) => {
-    console.log(note);
     try {
       const res = await updateTagsRequest({
         method: "post",

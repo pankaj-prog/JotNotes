@@ -21,6 +21,8 @@ const NotesColumn = ({
   currentPageName,
   selectedNote,
   setSelectedNote,
+  filterState,
+  filterDispatch,
 }) => {
   const { setEncodedToken, encodedToken } = useAuth();
   const [showSidebar, setShowSidebar] = useState(false);
@@ -46,7 +48,7 @@ const NotesColumn = ({
           content: "",
           tags: [],
           color: "",
-          isPinned: false,
+          priority: "medium",
           createdAt: Date.now(),
           editedAt: Date.now(),
         },
@@ -73,6 +75,7 @@ const NotesColumn = ({
             {pageTitle(currentPageName)}
           </p>
         </header>
+
         {currentPageName == "allNotes" && (
           <section className="new-note border-bottom padding-default">
             <button className="btn text-btn" onClick={createNoteHandler}>
@@ -85,7 +88,7 @@ const NotesColumn = ({
         )}
 
         {!(currentPageName == "allNotes") && notesList?.length == 0 && (
-          <section className="empty-notes-container padding-default">
+          <section className="empty-notes-container padding-default border-bottom">
             Your {pageTitle(currentPageName)} is currently empty.
           </section>
         )}
@@ -94,7 +97,10 @@ const NotesColumn = ({
           notesList={notesList}
           selectedNote={selectedNote}
           setSelectedNote={setSelectedNote}
+          filterState={filterState}
+          filterDispatch={filterDispatch}
         />
+
         <section className="user-wrapper padding-default">
           <h4>User's Name</h4>
           <button

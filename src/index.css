@@ -68,7 +68,7 @@ body {
 }
 
 .icon-btn-wrapper .name {
-  display: inline-block;
+  display: none;
   opacity: 0;
   background-color: var(--COLOR-SECONDARY-V3);
   border-radius: 2px;
@@ -82,6 +82,7 @@ body {
 }
 
 .icon-btn-wrapper:hover .name {
+  display: inline-block;
   opacity: 1;
 }
 

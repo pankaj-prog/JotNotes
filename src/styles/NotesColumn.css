@@ -43,6 +43,61 @@
   align-items: center;
 }
 
+.filter-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.filter-options {
+  display: flex;
+  align-items: center;
+}
+
+.filter-options .clear-filter-btn {
+  padding: 0 4px;
+  border-bottom: 1px solid var(--COLOR-PRIMARY);
+}
+
+.dropdown-wrapper {
+  position: relative;
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  background-color: var(--COLOR-SECONDARY);
+  box-shadow: 0px 0px 4px 0px var(--COLOR-PRIMARY-V3);
+  padding: 6px;
+  border-radius: 4px;
+  width: 6rem;
+  top: 2.4rem;
+  right: 0;
+  z-index: 1;
+}
+
+.dropdown .btn-selected {
+  background-color: var(--COLOR-SECONDARY-V3);
+}
+
+.dropdown-wrapper-sort:hover .sort.dropdown {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-wrapper-filter:hover .filter.dropdown {
+  right: -2rem;
+  width: 16rem;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.filter.dropdown section {
+  display: flex;
+  flex-direction: column;
+}
+
 .new-note button,
 .note-list-item {
   transition: background-color 0.6s ease;

@@ -11,8 +11,10 @@ export const useAxios = () => {
       setLoading(true);
       const res = await axios.request(params);
       setResponse(res.data);
+      return res.data;
     } catch (error) {
       setError(error);
+      return null;
     } finally {
       setLoading(false);
     }

@@ -10,6 +10,8 @@ const AllNotesProvider = ({ children }) => {
   const [allNotesList, setAllNotesList] = useState([]);
   const { makeRequest: updateColorRequest, response: updateColorResponse } =
     useAxios();
+  const { makeRequest: updateTagsRequest } = useAxios();
+  const { makeRequest: updateNotePriortiyRequest } = useAxios();
 
   const { encodedToken } = useAuth();
 
@@ -33,9 +35,61 @@ const AllNotesProvider = ({ children }) => {
     }
   }, [updateColorResponse]);
 
+  const updateNoteTags = async (note, tags) => {
+    console.log(note);
+    try {
+      const res = await updateTagsRequest({
+        method: "post",
+        url: `/api/notes/${note?._id}`,
+        headers: { authorization: encodedToken },
+        data: {
+          note: {
+            ...note,
+            tags,
+          },
+        },
+      });
+
+      if (res) {
+        setAllNotesList(res.notes);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const updateNotePriority = async (note, priority) => {
+    console.log("priority", note);
+    try {
+      const res = await updateNotePriortiyRequest({
+        method: "post",
+        url: `/api/notes/${note?._id}`,
+        headers: { authorization: encodedToken },
+        data: {
+          note: {
+            ...note,
+            priority,
+          },
+        },
+      });
+
+      if (res) {
+        setAllNotesList(res.notes);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <AllNotesContext.Provider
-      value={{ allNotesList, setAllNotesList, updateNoteColor }}
+      value={{
+        allNotesList,
+        setAllNotesList,
+        updateNoteColor,
+        updateNoteTags,
+        updateNotePriority,
+      }}
     >
       {children}
     </AllNotesContext.Provider>

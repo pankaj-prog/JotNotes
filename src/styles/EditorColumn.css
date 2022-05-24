@@ -10,6 +10,13 @@
   justify-content: space-between;
 }
 
+.priority {
+  padding: 4px 1rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .note-options {
   display: flex;
   align-items: center;
@@ -38,6 +45,23 @@
   border-radius: 50%;
   width: 1.5rem;
   height: 1.5rem;
+}
+
+.tags-section {
+  display: flex;
+  align-items: center;
+}
+
+.tags-wrapper {
+  display: flex;
+  gap: 8px;
+  margin: 0 8px;
+}
+
+.tag-chip {
+  background-color: var(--COLOR-SECONDARY-V3);
+  border-radius: 0.5rem;
+  padding: 0 0.5rem;
 }
 
 .note-title-input {

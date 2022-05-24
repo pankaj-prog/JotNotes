@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { AiOutlineDelete } from "react-icons/ai";
+import { AiOutlineDelete, AiOutlinePlusCircle } from "react-icons/ai";
 import { VscOpenPreview, VscColorMode } from "react-icons/vsc";
 import { IoArchiveOutline } from "react-icons/io5";
 import ReactQuill from "react-quill";
@@ -11,13 +11,20 @@ import { useAllNotes, useArchive, useAuth, useTrash } from "context";
 
 const colors = ["#f0f8ff", "#f9e5e5", "#d7f5c2"];
 
-const EditorColumn = ({ currentPageName, selectedNote, notesList }) => {
+const EditorColumn = ({ currentPageName, selectedNote, setSelectedNote }) => {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
-  const [color, setColor] = useState("");
+
+  const tagRef = useRef();
   const [showColors, setShowColors] = useState(false);
 
-  const { setAllNotesList, updateNoteColor } = useAllNotes();
+  const {
+    setAllNotesList,
+    updateNoteColor,
+    updateNoteTags,
+    updateNotePriority,
+  } = useAllNotes();
+
   const { addToArchive, unArchive, deleteFromArchive } = useArchive();
   const { moveToTrash, restoreNote, deleteFromTrash } = useTrash();
   const { encodedToken } = useAuth();
@@ -29,7 +36,6 @@ const EditorColumn = ({ currentPageName, selectedNote, notesList }) => {
     if (selectedNote) {
       setContent(selectedNote.content);
       setTitle(selectedNote.title);
-      setColor(selectedNote.color);
     }
   }, [selectedNote]);
 
@@ -68,9 +74,27 @@ const EditorColumn = ({ currentPageName, selectedNote, notesList }) => {
       </header>
     </main>
   ) : (
-    <main className="editor-column" style={{ backgroundColor: color }}>
+    <main
+      className="editor-column"
+      style={{ backgroundColor: selectedNote.color }}
+    >
       <header className="editor-column-header border-bottom">
-        <IconButton name="Focus" icon={<VscOpenPreview />} />
+        <div className="priority">
+          <label htmlFor="priority">Priority:</label>
+          <select
+            name="priority"
+            id="priority"
+            value={selectedNote.priority}
+            onChange={(e) => {
+              setSelectedNote({ ...selectedNote, priority: e.target.value });
+              updateNotePriority(selectedNote, e.target.value);
+            }}
+          >
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+          </select>
+        </div>
         <section className="note-options">
           {currentPageName == "allNotes" && (
             <>
@@ -89,8 +113,10 @@ const EditorColumn = ({ currentPageName, selectedNote, notesList }) => {
                         <span
                           className="color"
                           onClick={() => {
-                            console.log("clicked color", colorCode);
-                            setColor(colorCode);
+                            setSelectedNote({
+                              ...selectedNote,
+                              color: colorCode,
+                            });
                             updateNoteColor(selectedNote, colorCode);
                           }}
                           style={{ backgroundColor: colorCode }}
@@ -148,7 +174,7 @@ const EditorColumn = ({ currentPageName, selectedNote, notesList }) => {
           )}
         </section>
       </header>
-      <section className="note-title">
+      <section className="note-title border-bottom">
         <textarea
           readOnly={currentPageName == "allNotes" ? false : true}
           className="note-title-input text-lg padding-default"
@@ -159,16 +185,45 @@ const EditorColumn = ({ currentPageName, selectedNote, notesList }) => {
             e.target.style.height = "inherit";
             e.target.style.height = `${e.target.scrollHeight}px`;
             setTitle(e.target.value);
+            setSelectedNote({ ...selectedNote, title: e.target.value });
           }}
         />
+      </section>
+      <section className="tags-section">
+        <div className="tags-wrapper">
+          {selectedNote.tags.map((tag) => {
+            return (
+              <span key={tag} className="tag-chip">
+                {tag}
+              </span>
+            );
+          })}
+        </div>
+        <input type="text" ref={tagRef} placeholder="add tag..." />
+        <IconButton
+          icon={<AiOutlinePlusCircle />}
+          clickHandler={() => {
+            if (tagRef.current.value.trim()) {
+              updateNoteTags(selectedNote, [
+                ...selectedNote.tags,
+                tagRef.current.value.trim(),
+              ]);
+              setSelectedNote({
+                ...selectedNote,
+                tags: [...selectedNote.tags, tagRef.current.value],
+              });
+            }
+            tagRef.current.value = "";
+          }}
+        ></IconButton>
       </section>
       <section className="editor-wrapper">
         <ReactQuill
           theme={currentPageName == "allNotes" ? "snow" : "bubble"}
           value={content}
           onChange={(e) => {
-            console.log("on change working");
             setContent(e);
+            setSelectedNote({ ...selectedNote, content: e });
           }}
           readOnly={currentPageName == "allNotes" ? false : true}
           placeholder="Start jotting your notes..."
